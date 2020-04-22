@@ -1,7 +1,7 @@
 {
-  "name": "working-with-bikeindex-api",
+  "name": "working-with-dinoipsum-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "#### Epicodus Week 6 | Intermediate JavaScript: Asynchrony and API's",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode development",

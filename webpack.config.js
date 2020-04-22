@@ -18,7 +18,7 @@ module.exports = {
     new UglifyJsPlugin({ sourceMap: true }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Bike Index API Practice',
+      title: 'Dino Ipsum API Practice',
       template: './src/index.html',
       inject: 'body'
     })
