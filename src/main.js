@@ -1,5 +1,5 @@
 import './styles.css';
-
+import $ from 'jquery';
 
 
 $(document).ready(function(){
@@ -8,23 +8,29 @@ $(document).ready(function(){
     const words = parseInt($('#words').val());
     const paragraphs = parseInt($('#paragraphs').val());
 
-    let request = new XMLHttpRequest();
-    const url = `http://dinoipsum.herokuapp.com/api?format=json&words=${words}&paragraphs=${paragraphs}`;
+    let promise = new Promise(function(resolve, reject){
+      let request = new XMLHttpRequest();
+      const url = `http://dinoipsum.herokuapp.com/api?format=json&words=${words}&paragraphs=${paragraphs}`;
 
-    request.onreadystatechange = function(){
-      if (this.readyState === 4 && this.status === 200){
-        const response = JSON.parse(this.responseText);
-        showText(response);
-      }
-    };
+      request.onLoad = function(){
+        if (this.status === 200){
+          resolve(request.response);
+        } else {
+          reject(Error(request.statusText));
+        }
+      };
 
-    request.open('GET', url, true);
-    request.send();
+      request.open('GET', url, true);
+      request.send();
+    });
 
-    const showText = function(response) {
-      console.log(response);
-      $('#output').text(`${response}`);
-    };
+    promise.then(function(response){
+      let body=JSON.parse(response);
+      $('#output').text(body);
+    }, function(error){
+      $('#output').text(`There was an error ${error.message}`);
+    });
+
 
   });
 });
