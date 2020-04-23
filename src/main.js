@@ -16,14 +16,15 @@ $(document).ready(function(){
         const response = JSON.parse(this.responseText);
         showText(response);
       }
-    }
+    };
 
     request.open('GET', url, true);
     request.send();
 
     const showText = function(response) {
+      console.log(response);
       $('#output').text(`${response}`);
-    }
+    };
 
   });
 });
